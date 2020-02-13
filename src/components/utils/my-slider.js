@@ -4,26 +4,43 @@ import VolumeUp from '@material-ui/icons/VolumeUp';
 import VolumeOff from '@material-ui/icons/VolumeOff'
 import Slider from '@material-ui/core/Slider';
 import axios from 'axios'
+import { isBoolean } from 'util';
 
 class MySlider extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             value: 0,
-            step: parseInt(this.props.stepSlider) ? this.props.stepSlider : 1
+            step: parseInt(this.props.stepSlider) ? parseInt(this.props.stepSlider) : 1,
+            mute: null
         }
     }
-    componentDidMount(props) {
+
+
+    change = (id, newValue) => {
+
+        isBoolean(newValue) ? this.setState({ mute: newValue }) : this.setState({ value: newValue })
+
+        axios.post(`http://192.168.0.99:4000/sound/change/68/${id}`, { value: newValue })
+            .then(res => {
+                var sound = res.data
+                console.log(sound)
+            })
+
     }
 
     handleChange = (event, newValue) => {
-        this.setState({ value: newValue })
-        axios.post(`http://192.168.0.99:4000/sound/change/68/${this.props.id}`, { value: newValue })
-            .then(res => {
-                console.log(res.data)
-            })
+        this.change(this.props.id, newValue)
     };
+    handleClick(newValue) {
+        var num = parseInt(newValue)
+        var value = this.state.value + num
+        if (value < 0 || value > 47) {
+            value < 0 ? value = 0 : value = 47
+        }
+        this.change(this.props.id, value)
 
+    }
     render() {
         const {
             controls,
@@ -47,8 +64,13 @@ class MySlider extends React.Component {
             <div>
                 <span>{nameSlider}</span>
                 <br />
-                {mute ? <button> <VolumeOff /></button> : null}
-                <button style={styleControls}><VolumeDown /></button>
+                {mute ? <button style={styleControls, { backgroundColor: this.state.mute ? 'gray' : '#DDD' }}
+                    id='mute'
+                    onClick={() => this.change('mute', !this.state.mute)}
+                ><VolumeOff /></button> : null}
+                <button style={styleControls}
+                    onClick={() => this.handleClick('-2')}
+                ><VolumeDown /></button>
 
                 <Slider
                     style={
@@ -58,11 +80,11 @@ class MySlider extends React.Component {
                     min={parseInt(minNum)}
                     max={parseInt(maxNum)}
                     step={this.state.step}
-                    onChange={this.handleChange}
+                    onChangeCommitted={this.handleChange}
                     aria-labelledby="continuous-slider"
                 />
 
-                <button style={styleControls}><VolumeUp /></button>
+                <button style={styleControls} onClick={() => this.handleClick('2')} ><VolumeUp /></button>
                 <br />
                 <span>{this.state.value}</span>
             </div>

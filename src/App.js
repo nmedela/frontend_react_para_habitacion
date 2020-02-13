@@ -9,9 +9,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 //se encuentran las rutas
 import pathIndex from './config'
 
-const styleEncabezado ={
-  backgroundColor:"black",
-  height:'100px'
+const styleEncabezado = {
+  backgroundColor: "black",
+  height: '100px'
 }
 
 function App() {
@@ -23,11 +23,11 @@ function App() {
           <Global />
         </div>
         <div>
-        <Switch>
-          <Redirect from='/' exact to='/light' />
-          <Route path={pathIndex[0]} component={Light} exact />
-          <Route path={pathIndex[1]} component={Sound} exact />
-        </Switch>
+          <Switch>
+            <Redirect from='/' exact to='/light' />
+            <Route path={pathIndex[0]} component={Light} exact />
+            <Route path={pathIndex[1]} component={Sound} exact />
+          </Switch>
 
         </div>
       </Router>

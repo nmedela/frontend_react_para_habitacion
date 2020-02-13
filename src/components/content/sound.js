@@ -1,10 +1,8 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Onoff from './../utils/onoff'
-import Slider from '@material-ui/core/Slider';
-import SliderParameter from './../utils/sliderParameters';
 import MySlider from './../utils/my-slider';
-
+import axios from 'axios'
 
 const style12 = {
     height: '140px',
@@ -18,7 +16,19 @@ const styleContainer = { width: '800px', margin: '0px', backgroundColor: 'rgb(20
 
 
 class Sound extends React.Component {
+    data
+    constructor(props) {
+        super(props)
+        this.state = {
+            volumen: 0,
+            bass: 0,
+            treble: 0
+        }
+    }
 
+    devuelve = () => {
+        return this.state
+    }
     render() {
         return (
 
@@ -50,7 +60,7 @@ class Sound extends React.Component {
                             id='bass'
                             maxNum='14'
                             minNum='-14'
-                            stepSlider= '2'
+                            stepSlider='2'
                             nameSlider='Graves'
                         />
                     </Grid>
