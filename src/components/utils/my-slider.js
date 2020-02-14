@@ -10,23 +10,26 @@ class MySlider extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: 0,
+            value: null,
             step: parseInt(this.props.stepSlider) ? parseInt(this.props.stepSlider) : 1,
             mute: null
         }
+
     }
 
+    componentWillMount() {
+        this.setState({
+            value: this.props.value
+        })
+    }
 
     change = (id, newValue) => {
-
         isBoolean(newValue) ? this.setState({ mute: newValue }) : this.setState({ value: newValue })
-
         axios.post(`http://192.168.0.99:4000/sound/change/68/${id}`, { value: newValue })
             .then(res => {
                 var sound = res.data
                 console.log(sound)
             })
-
     }
 
     handleChange = (event, newValue) => {
@@ -64,7 +67,10 @@ class MySlider extends React.Component {
             <div>
                 <span>{nameSlider}</span>
                 <br />
-                {mute ? <button style={styleControls, { backgroundColor: this.state.mute ? 'gray' : '#DDD' }}
+                {mute ? <button
+                    style={
+                        styleControls,
+                        { backgroundColor: this.state.mute ? 'gray' : '#DDD' }}
                     id='mute'
                     onClick={() => this.change('mute', !this.state.mute)}
                 ><VolumeOff /></button> : null}

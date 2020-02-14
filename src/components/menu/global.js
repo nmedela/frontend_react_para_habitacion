@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Brightness5Icon from '@material-ui/icons/Brightness5';
@@ -24,7 +23,7 @@ class Global extends React.Component {
     }
   }
   componentDidMount() {
-    this.setState({ value: pathIndex.findIndex(e => e == window.location.pathname) })
+    this.setState({ value: pathIndex.findIndex(e => e === window.location.pathname) })
   }
   render() {
     return (
