@@ -23,7 +23,7 @@ class Sound extends React.Component {
             treble: null,
             balanceL: null,
             balanceR: null,
-            power: false,
+            power: null,
             isLoading: true
         }
     }
@@ -37,7 +37,7 @@ class Sound extends React.Component {
                     treble: res.data.treble,
                     balanceL: res.data.balanceL,
                     balanceR: res.data.balanceR,
-                    // power: res.data.power,
+                    power: res.data.power,
                     isLoading: false
                 })
                 console.log(this.state)
@@ -46,13 +46,11 @@ class Sound extends React.Component {
     }
 
     handleClick = (event, newValue) => {
-        this.setState({
-            power: !this.state.power
-        })
-        axios.post(`http://192.168.0.99:4000/sound/change/68/power`, { value: (this.state.power ? 1 : 0) })
-            .then(res => {
-                var sound = res.data
-                console.log(sound)
+        axios.post(`http://192.168.0.99:4000/sound/change/68/power`, { value: (this.state.power ? 0 : 1) })
+            .then((res) => {
+                this.setState({
+                    power: !this.state.power
+                })
             })
     }
     render() {
@@ -68,7 +66,9 @@ class Sound extends React.Component {
                     <Grid style={style12} item xs={12}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={2}>
-                                <button onClick={this.handleClick} style={{backgroundColor: !!this.state.power?'green':'red'}}> Encender con imagen de encendido</button>
+                                <button onClick={this.handleClick}
+                                    style={{ backgroundColor: !this.state.power ? 'green' : 'red' }}
+                                > Encender con imagen de encendido</button>
                                 <button disabled>Boton de restablecer valores</button>
                             </Grid>
                             <Grid item xs={12} sm={1}>
