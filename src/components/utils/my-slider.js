@@ -61,7 +61,6 @@ componentWillReceiveProps(props){
             value: this.props.value
         })
     }
-
     change = (id, newValue) => {
         isBoolean(newValue) ? this.setState({ mute: newValue }) : this.setState({ value: newValue })
         axios.post(`http://${url}/sound/change/68/${id}`, { value: newValue })

@@ -5,7 +5,7 @@ import axios from 'axios'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {url} from '../../config'
+import { url } from '../../config'
 
 const style12 = {
     height: '140px',
@@ -34,10 +34,12 @@ class Sound extends React.Component {
             isLoading: true
         }
     }
+    
+    interval = 0
 
     componentWillMount() {
         this.init()
-        setInterval(() => {
+        this.interval = setInterval(() => {
             axios.get(`http://${url}/sound/sounds/68`)
                 .then((res) => {
                     if (JSON.stringify(this.state.sound) != res.data) {
@@ -45,6 +47,10 @@ class Sound extends React.Component {
                     }
                 })
         }, 3000)
+    }
+    componentWillUnmount() {
+        console.log('Se desmonta')
+        clearInterval(this.interval)
     }
     init() {
         axios.get(`http://${url}/sound/sounds/68`)
