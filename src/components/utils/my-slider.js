@@ -1,12 +1,13 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import VolumeOff from '@material-ui/icons/VolumeOff'
 import Slider from '@material-ui/core/Slider';
 import axios from 'axios'
 import { isBoolean } from 'util';
-import { height, borderRadius } from '@material-ui/system';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {url} from '../../config'
 
 const theme = createMuiTheme({
     overrides: {
@@ -20,7 +21,7 @@ const theme = createMuiTheme({
                 // color:'black',
                 backgroundColor: '#fff',
                 borderBottom: '2px solid black',
-                marginLeft: '-25px'
+                marginLeft: '-10px'
             },
             rail: {
                 height: '25px',
@@ -49,7 +50,12 @@ class MySlider extends React.Component {
         }
 
     }
+componentWillReceiveProps(props){
+    this.setState({
+        value: props.value
+    })
 
+}
     componentWillMount() {
         this.setState({
             value: this.props.value
@@ -58,10 +64,10 @@ class MySlider extends React.Component {
 
     change = (id, newValue) => {
         isBoolean(newValue) ? this.setState({ mute: newValue }) : this.setState({ value: newValue })
-        axios.post(`http://192.168.0.99:4000/sound/change/68/${id}`, { value: newValue })
+        axios.post(`http://${url}/sound/change/68/${id}`, { value: newValue })
             .then(res => {
                 var sound = res.data
-                console.log(sound)
+                // console.log(sound)
             })
     }
 
@@ -90,31 +96,40 @@ class MySlider extends React.Component {
 
         const styleControls = {
             display: controls ? 'inline' : 'none',
-            marginRight: '40px',
-            marginLeft:'10px',
+            marginRight: '20px',
+            marginLeft: '10px',
             borderBottom: ' 1px solid black',
-            width:'60px',
-            height:'50px',
-            borderRadius:'5px',
-            cursor:'none'
+            width: '70px',
+            height: '60px',
+            borderRadius: '5px',
+            cursor: 'none'
 
         }
         const styleSlider = {
             width: long ? long : '300px',
             height: '20px',
-            marginTop:'15px',
-            cursor:'none'
+            marginTop: '1px',
+            cursor: 'none'
         }
         return (
             <div>
-                <span>{nameSlider}</span>
-                <br />
-                {mute ? <button
-                    style={
-                        { backgroundColor: this.state.mute ? 'gray' : '#DDD', width:'60px', height:'50px',borderBottom: ' 1px solid black', }}
-                    id='mute'
-                    onClick={() => this.change('mute', !this.state.mute)}
-                ><VolumeOff /></button> : null}
+                <Typography style={{ fontSize: '20px',border:'1px solid rgb(160,160,160)', borderRadius:'10px'  }} align='center'  >
+                <span>
+                    {nameSlider +" "} 
+                </span>
+                <span style={{fontStyle:'italic', fontWeight:'bold'}}>
+                    {this.state.value}
+                </span>
+                </Typography>
+                {/* <br /> */}
+                {
+                    mute ? <button
+                        style={
+                            { backgroundColor: this.state.mute ? 'gray' : '#DDD', width: '70px', height: '60px', borderBottom: ' 1px solid black', }}
+                        id='mute'
+                        onClick={() => this.change('mute', !this.state.mute)}
+                    ><VolumeOff /></button> : null
+                }
                 <button style={styleControls}
                     onClick={() => this.handleClick('-2')}
                 ><VolumeDown /></button>
@@ -135,8 +150,8 @@ class MySlider extends React.Component {
 
                 <button style={styleControls} onClick={() => this.handleClick('2')} ><VolumeUp /></button>
                 <br />
-                <span>{this.state.value}</span>
-            </div>
+                
+            </div >
         )
     }
 }

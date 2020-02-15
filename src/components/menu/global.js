@@ -4,6 +4,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Brightness5Icon from '@material-ui/icons/Brightness5';
 import PlayCircleFilledSharpIcon from '@material-ui/icons/PlayCircleFilledSharp';
+import Typography from '@material-ui/core/Typography';
 import pathIndex from './../../config'
 import './../../App.css'
 
@@ -38,13 +39,13 @@ class Global extends React.Component {
 
       >
         <BottomNavigationAction
-          label="Luces"
+          // label="Luces"
           style={{ cursor: 'none' }}
           icon={<Brightness5Icon
             style={{ fontSize: '50px', cursor: 'none' }} />}
           component={Link} to={pathIndex[0]} />
         <BottomNavigationAction
-          label="Audio"
+          // label="Audio"
           style={{  cursor:'none'}}
           icon={<PlayCircleFilledSharpIcon
             style={{ fontSize: '50px', cursor: 'none' }} />}

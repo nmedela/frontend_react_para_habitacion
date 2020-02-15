@@ -4,7 +4,8 @@ import MySlider from './../utils/my-slider';
 import axios from 'axios'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import IconButton from '@material-ui/core/IconButton';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {url} from '../../config'
 
 const style12 = {
     height: '140px',
@@ -12,8 +13,8 @@ const style12 = {
 }
 const style6 = {
     height: '120px',
-    border: '1px solid rgb(190,190,190)',
-  
+    // border: '1px solid rgb(190,190,190)',
+
 }
 const styleContainer = { width: '800px', margin: '0px', backgroundColor: 'rgb(200,200,200)' }
 
@@ -22,46 +23,59 @@ class Sound extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            volumen: null,
-            bass: null,
-            treble: null,
-            balanceL: null,
-            balanceR: null,
-            power: null,
+            sound: {
+                volumen: null,
+                bass: null,
+                treble: null,
+                balanceL: null,
+                balanceR: null,
+                power: null,
+            },
             isLoading: true
         }
     }
 
     componentWillMount() {
-        axios.get(`http://192.168.0.99:4000/sound/sounds/68`)
+        this.init()
+        setInterval(() => {
+            axios.get(`http://${url}/sound/sounds/68`)
+                .then((res) => {
+                    if (JSON.stringify(this.state.sound) != res.data) {
+                        this.init()
+                    }
+                })
+        }, 3000)
+    }
+    init() {
+        axios.get(`http://${url}/sound/sounds/68`)
             .then((res) => {
                 this.setState({
-                    volumen: res.data.volumen,
-                    bass: res.data.bass,
-                    treble: res.data.treble,
-                    balanceL: res.data.balanceL,
-                    balanceR: res.data.balanceR,
-                    power: res.data.power,
+                    sound: res.data,
                     isLoading: false
                 })
-                console.log(this.state)
-                console.log(res.data)
             })
+
     }
 
     handleClick = (event, newValue) => {
-        axios.post(`http://192.168.0.99:4000/sound/change/68/power`, { value: (this.state.power ? 0 : 1) })
+        axios.post(`http://${url}/sound/change/68/power`, { value: (this.state.sound.power ? 0 : 1) })
             .then((res) => {
                 this.setState({
-                    power: !this.state.power
+                    sound: { power: !this.state.sound.power }
                 })
             })
     }
     render() {
 
         if (this.state.isLoading) {
-            console.log("paso por el cargando")
-            return <p>Está cargando</p>
+            return <div >
+                <Grid container spacing={3}>
+                    <Grid item xs={12} align='center'>
+                        <CircularProgress disableShrink style={{ width: '100px', height: '100px' }} />
+                        <p>Cargando...</p>
+                    </Grid>
+                </Grid>
+            </div>
 
         }
         return (
@@ -72,12 +86,13 @@ class Sound extends React.Component {
                             <Grid item xs={12} sm={2}>
                                 <IconButton onClick={this.handleClick}
                                     style={
-                                        { backgroundColor: 'rgb(250,250,250)',
-                                    borderBottom:'4px solid rgb(100,100,100)',
-                                    cursor:'none'
+                                        {
+                                            backgroundColor: 'rgb(250,250,250)',
+                                            borderBottom: '4px solid rgb(100,100,100)',
+                                            cursor: 'none'
+                                        }
                                     }
-                                    }
-                                > <PowerSettingsNewIcon color={!this.state.power ? 'disabled' : 'secondary'}
+                                > <PowerSettingsNewIcon color={!this.state.sound.power ? 'disabled' : 'secondary'}
                                     style={{ fontSize: 60 }} /></IconButton>
                                 {/* <button disabled>Restablecer</button> */}
                             </Grid>
@@ -92,7 +107,7 @@ class Sound extends React.Component {
                                     minNum='0'
                                     mute
                                     nameSlider='Volumen'
-                                    value={this.state.volumen}
+                                    value={this.state.sound.volumen}
                                 />
                             </Grid>
                         </Grid>
@@ -104,7 +119,7 @@ class Sound extends React.Component {
                             minNum='-14'
                             stepSlider='2'
                             nameSlider='Graves'
-                            value={this.state.bass}
+                            value={this.state.sound.bass}
 
                         />
                     </Grid>
@@ -115,7 +130,7 @@ class Sound extends React.Component {
                             minNum='-14'
                             stepSlider='2'
                             nameSlider='Agudos'
-                            value={this.state.treble}
+                            value={this.state.sound.treble}
 
                         />
                     </Grid>
@@ -125,7 +140,7 @@ class Sound extends React.Component {
                             maxNum='79'
                             minNum='0'
                             nameSlider='Balance L'
-                            value={this.state.balanceL}
+                            value={this.state.sound.balanceL}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} style={style6}>
@@ -134,7 +149,7 @@ class Sound extends React.Component {
                             maxNum='79'
                             minNum='0'
                             nameSlider='Balance R'
-                            value={this.state.balanceR}
+                            value={this.state.sound.balanceR}
                         />
                     </Grid>
 
