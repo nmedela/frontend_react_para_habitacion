@@ -10,7 +10,7 @@ import './../../App.css'
 const styleEncabezado = {
   backgroundColor: "orange",
   height: '100px',
-  
+  cursor: 'none'
 }
 
 class Global extends React.Component {
@@ -35,10 +35,20 @@ class Global extends React.Component {
         }}
         showLabels
         style={styleEncabezado}
-        
+
       >
-        <BottomNavigationAction  label="Luces" icon={<Brightness5Icon />} component={Link} to={pathIndex[0]} />
-        <BottomNavigationAction label="Audio" icon={<PlayCircleFilledSharpIcon />} component={Link} to={pathIndex[1]} />
+        <BottomNavigationAction
+          label="Luces"
+          style={{ cursor: 'none' }}
+          icon={<Brightness5Icon
+            style={{ fontSize: '50px', cursor: 'none' }} />}
+          component={Link} to={pathIndex[0]} />
+        <BottomNavigationAction
+          label="Audio"
+          style={{  cursor:'none'}}
+          icon={<PlayCircleFilledSharpIcon
+            style={{ fontSize: '50px', cursor: 'none' }} />}
+          component={Link} to={pathIndex[1]} />
       </BottomNavigation>
 
 

@@ -2,14 +2,18 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import MySlider from './../utils/my-slider';
 import axios from 'axios'
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import IconButton from '@material-ui/core/IconButton';
+
 
 const style12 = {
     height: '140px',
-    border: '1px solid'
+    // border: '1px solid'
 }
 const style6 = {
     height: '120px',
-    border: '1px solid'
+    border: '1px solid rgb(190,190,190)',
+  
 }
 const styleContainer = { width: '800px', margin: '0px', backgroundColor: 'rgb(200,200,200)' }
 
@@ -66,14 +70,20 @@ class Sound extends React.Component {
                     <Grid style={style12} item xs={12}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={2}>
-                                <button onClick={this.handleClick}
-                                    style={{ backgroundColor: !this.state.power ? 'green' : 'red' }}
-                                > Encender con imagen de encendido</button>
-                                <button disabled>Boton de restablecer valores</button>
+                                <IconButton onClick={this.handleClick}
+                                    style={
+                                        { backgroundColor: 'rgb(250,250,250)',
+                                    borderBottom:'4px solid rgb(100,100,100)',
+                                    cursor:'none'
+                                    }
+                                    }
+                                > <PowerSettingsNewIcon color={!this.state.power ? 'disabled' : 'secondary'}
+                                    style={{ fontSize: 60 }} /></IconButton>
+                                {/* <button disabled>Restablecer</button> */}
                             </Grid>
-                            <Grid item xs={12} sm={1}>
-                            </Grid>
-                            <Grid item xs={12} sm={8}>
+                            {/* <Grid item xs={12} sm={1}>
+                            </Grid> */}
+                            <Grid item xs={12} sm={10}>
                                 <MySlider
                                     controls
                                     long='350px'

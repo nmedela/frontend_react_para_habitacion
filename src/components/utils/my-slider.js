@@ -5,6 +5,39 @@ import VolumeOff from '@material-ui/icons/VolumeOff'
 import Slider from '@material-ui/core/Slider';
 import axios from 'axios'
 import { isBoolean } from 'util';
+import { height, borderRadius } from '@material-ui/system';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+    overrides: {
+        // Style sheet name ⚛️
+        MuiSlider: {
+            // Name of the rule
+            thumb: {
+                // Some CSS
+                width: '35px',
+                height: '35px',
+                // color:'black',
+                backgroundColor: '#fff',
+                borderBottom: '2px solid black',
+                marginLeft: '-25px'
+            },
+            rail: {
+                height: '25px',
+                color: 'gray',
+                borderBottom: '2px solid black',
+                borderBottomRightRadius: '10px',
+                borderBottomLeftRadius: '10px'
+            },
+            track: {
+                height: '25px',
+                color: 'blue',
+                borderBottomRightRadius: '10px',
+                borderBottomLeftRadius: '10px'
+            },
+        },
+    },
+});
 
 class MySlider extends React.Component {
     constructor(props) {
@@ -57,11 +90,20 @@ class MySlider extends React.Component {
 
         const styleControls = {
             display: controls ? 'inline' : 'none',
-            margin: '5px',
+            marginRight: '40px',
+            marginLeft:'10px',
+            borderBottom: ' 1px solid black',
+            width:'60px',
+            height:'50px',
+            borderRadius:'5px',
+            cursor:'none'
 
         }
         const styleSlider = {
-            width: long ? long : '300px'
+            width: long ? long : '300px',
+            height: '20px',
+            marginTop:'15px',
+            cursor:'none'
         }
         return (
             <div>
@@ -69,26 +111,27 @@ class MySlider extends React.Component {
                 <br />
                 {mute ? <button
                     style={
-                        styleControls,
-                        { backgroundColor: this.state.mute ? 'gray' : '#DDD' }}
+                        { backgroundColor: this.state.mute ? 'gray' : '#DDD', width:'60px', height:'50px',borderBottom: ' 1px solid black', }}
                     id='mute'
                     onClick={() => this.change('mute', !this.state.mute)}
                 ><VolumeOff /></button> : null}
                 <button style={styleControls}
                     onClick={() => this.handleClick('-2')}
                 ><VolumeDown /></button>
+                <ThemeProvider theme={theme}>
 
-                <Slider
-                    style={
-                        styleSlider
-                    }
-                    value={this.state.value}
-                    min={parseInt(minNum)}
-                    max={parseInt(maxNum)}
-                    step={this.state.step}
-                    onChangeCommitted={this.handleChange}
-                    aria-labelledby="continuous-slider"
-                />
+                    <Slider
+                        style={
+                            styleSlider
+                        }
+                        value={this.state.value}
+                        min={parseInt(minNum)}
+                        max={parseInt(maxNum)}
+                        step={this.state.step}
+                        onChangeCommitted={this.handleChange}
+                        aria-labelledby="continuous-slider"
+                    />
+                </ThemeProvider>
 
                 <button style={styleControls} onClick={() => this.handleClick('2')} ><VolumeUp /></button>
                 <br />
