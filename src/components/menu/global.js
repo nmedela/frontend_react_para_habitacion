@@ -7,6 +7,7 @@ import PlayCircleFilledSharpIcon from '@material-ui/icons/PlayCircleFilledSharp'
 import Typography from '@material-ui/core/Typography';
 import pathIndex from './../../config'
 import './../../App.css'
+import { Grid } from '@material-ui/core';
 
 const styleEncabezado = {
   backgroundColor: "orange",
@@ -56,5 +57,4 @@ class Global extends React.Component {
     )
   }
 }
-
 export default Global

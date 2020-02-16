@@ -34,7 +34,7 @@ class Sound extends React.Component {
             isLoading: true
         }
     }
-    
+
     interval = 0
 
     componentWillMount() {
@@ -87,78 +87,81 @@ class Sound extends React.Component {
         return (
             < div >
                 <Grid style={styleContainer} container spacing={3}>
-                    <Grid style={style12} item xs={12}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={2}>
-                                <IconButton onClick={this.handleClick}
-                                    style={
-                                        {
-                                            backgroundColor: 'rgb(250,250,250)',
-                                            borderBottom: '4px solid rgb(100,100,100)',
-                                            cursor: 'none'
+                    <Grid container spacing={1} style={{margin:'10px'}} aling='center'>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} sm={2} align='center'>
+                                    <IconButton onClick={this.handleClick}
+                                        style={
+                                            {
+                                                backgroundColor: 'rgb(250,250,250)',
+                                                borderBottom: '4px solid rgb(100,100,100)',
+                                                cursor: 'none'
+                                            }
                                         }
-                                    }
-                                > <PowerSettingsNewIcon color={!this.state.sound.power ? 'disabled' : 'secondary'}
-                                    style={{ fontSize: 60 }} /></IconButton>
-                                {/* <button disabled>Restablecer</button> */}
-                            </Grid>
-                            {/* <Grid item xs={12} sm={1}>
-                            </Grid> */}
-                            <Grid item xs={12} sm={10}>
-                                <MySlider
-                                    controls
-                                    long='350px'
-                                    id='volumen'
-                                    maxNum='47'
-                                    minNum='0'
-                                    mute
-                                    nameSlider='Volumen'
-                                    value={this.state.sound.volumen}
-                                />
-                            </Grid>
+                                    > <PowerSettingsNewIcon color={!this.state.sound.power ? 'disabled' : 'secondary'}
+                                        style={{ fontSize: 60 }} /></IconButton>
+                                    {/* <button disabled>Restablecer</button> */}
+                                </Grid>
+                                <Grid item xs={12} sm={10}>
+                                    <MySlider
+                                        controls
+                                        long='350px'
+                                        id='volumen'
+                                        maxNum='47'
+                                        minNum='0'
+                                        mute
+                                        nameSlider='Volumen'
+                                        value={this.state.sound.volumen}
+                                    />
+                                </Grid>
                         </Grid>
                     </Grid>
-                    <Grid style={style6} item xs={12} sm={6}>
-                        <MySlider
-                            id='bass'
-                            maxNum='14'
-                            minNum='-14'
-                            stepSlider='2'
-                            nameSlider='Graves'
-                            value={this.state.sound.bass}
+                    <Grid container spacing={1} style={{margin:'10px'}} aling='center'>
+                        <Grid style={style6} item xs={12} sm={6}>
+                            <MySlider
+                                id='bass'
+                                maxNum='14'
+                                minNum='-14'
+                                stepSlider='2'
+                                nameSlider='Graves'
+                                value={this.state.sound.bass}
 
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6} style={style6}>
-                        <MySlider
-                            id='treble'
-                            maxNum='14'
-                            minNum='-14'
-                            stepSlider='2'
-                            nameSlider='Agudos'
-                            value={this.state.sound.treble}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6} style={style6}>
+                            <MySlider
+                                id='treble'
+                                maxNum='14'
+                                minNum='-14'
+                                stepSlider='2'
+                                nameSlider='Agudos'
+                                value={this.state.sound.treble}
 
-                        />
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid style={style6} item xs={12} sm={6}>
-                        <MySlider
-                            id='balanceL'
-                            maxNum='79'
-                            minNum='0'
-                            nameSlider='Balance L'
-                            value={this.state.sound.balanceL}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6} style={style6}>
-                        <MySlider
-                            id='balanceR'
-                            maxNum='79'
-                            minNum='0'
-                            nameSlider='Balance R'
-                            value={this.state.sound.balanceR}
-                        />
-                    </Grid>
+                    <Grid container spacing={1} style={{margin:'10px'}} aling='center'>
 
+                        <Grid style={style6} item xs={12} sm={6}>
+                            <MySlider
+                                id='balanceL'
+                                maxNum='79'
+                                minNum='0'
+                                nameSlider='Balance L'
+                                value={this.state.sound.balanceL}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6} style={style6}>
+                            <MySlider
+                                id='balanceR'
+                                maxNum='79'
+                                minNum='0'
+                                nameSlider='Balance R'
+                                value={this.state.sound.balanceR}
+                            />
+                        </Grid>
+
+                    </Grid>
                 </Grid>
             </div >
         )

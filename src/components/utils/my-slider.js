@@ -7,7 +7,9 @@ import Slider from '@material-ui/core/Slider';
 import axios from 'axios'
 import { isBoolean } from 'util';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import {url} from '../../config'
+import { url } from '../../config'
+import Grid from '@material-ui/core/Grid';
+
 
 const theme = createMuiTheme({
     overrides: {
@@ -50,12 +52,12 @@ class MySlider extends React.Component {
         }
 
     }
-componentWillReceiveProps(props){
-    this.setState({
-        value: props.value
-    })
+    componentWillReceiveProps(props) {
+        this.setState({
+            value: props.value
+        })
 
-}
+    }
     componentWillMount() {
         this.setState({
             value: this.props.value
@@ -108,48 +110,54 @@ componentWillReceiveProps(props){
             width: long ? long : '300px',
             height: '20px',
             marginTop: '1px',
+            marginLeft: '15px',
             cursor: 'none'
         }
         return (
             <div>
-                <Typography style={{ fontSize: '20px',border:'1px solid rgb(160,160,160)', borderRadius:'10px'  }} align='center'  >
-                <span>
-                    {nameSlider +" "} 
-                </span>
-                <span style={{fontStyle:'italic', fontWeight:'bold'}}>
-                    {this.state.value}
-                </span>
-                </Typography>
-                {/* <br /> */}
-                {
-                    mute ? <button
-                        style={
-                            { backgroundColor: this.state.mute ? 'gray' : '#DDD', width: '70px', height: '60px', borderBottom: ' 1px solid black', }}
-                        id='mute'
-                        onClick={() => this.change('mute', !this.state.mute)}
-                    ><VolumeOff /></button> : null
-                }
-                <button style={styleControls}
-                    onClick={() => this.handleClick('-2')}
-                ><VolumeDown /></button>
-                <ThemeProvider theme={theme}>
+                <Grid container align='center' spacing={1}>
+                    <Grid item xs={12} sm={12}>
 
-                    <Slider
-                        style={
-                            styleSlider
+                        <Typography style={{ fontSize: '20px', border: '1px solid rgb(160,160,160)', borderRadius: '10px' }} align='center'  >
+                            <span>
+                                {nameSlider + " "}
+                            </span>
+                            <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>
+                                {this.state.value}
+                            </span>
+                        </Typography>
+                        {/* <br /> */}
+                        {
+                            mute ? <button
+                                style={
+                                    { backgroundColor: this.state.mute ? 'gray' : '#DDD', width: '70px', height: '60px', borderBottom: ' 1px solid black', }}
+                                id='mute'
+                                onClick={() => this.change('mute', !this.state.mute)}
+                            ><VolumeOff /></button> : null
                         }
-                        value={this.state.value}
-                        min={parseInt(minNum)}
-                        max={parseInt(maxNum)}
-                        step={this.state.step}
-                        onChangeCommitted={this.handleChange}
-                        aria-labelledby="continuous-slider"
-                    />
-                </ThemeProvider>
+                        <button style={styleControls}
+                            onClick={() => this.handleClick('-2')}
+                        ><VolumeDown /></button>
+                        <ThemeProvider theme={theme}>
 
-                <button style={styleControls} onClick={() => this.handleClick('2')} ><VolumeUp /></button>
-                <br />
-                
+                            <Slider
+                                style={
+                                    styleSlider
+                                }
+                                value={this.state.value}
+                                min={parseInt(minNum)}
+                                max={parseInt(maxNum)}
+                                step={this.state.step}
+                                onChangeCommitted={this.handleChange}
+                                aria-labelledby="continuous-slider"
+                            />
+                        </ThemeProvider>
+
+                        <button style={styleControls} onClick={() => this.handleClick('2')} ><VolumeUp /></button>
+                        <br />
+
+                    </Grid>
+                </Grid>
             </div >
         )
     }
