@@ -1,10 +1,10 @@
 import React from 'react';
 // import './App.css';
 import Global from './components/menu/global'
-import Sound from './components/content/sound'
-import Light from './components/content/light';
-
+import Sound from './components/content/sound/sound'
+import Light from './components/content/light/light';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import DenseAppBar from './components/menu/appBar'
 
 //se encuentran las rutas
 import pathIndex from './config'

@@ -1,7 +1,9 @@
 import React from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import DenseAppBar from './../menu/appBar'
+import DenseAppBar from '../../menu/appBar'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import MainLight from './main'
 
 class Light extends React.Component {
     constructor(props) {
@@ -40,11 +42,12 @@ class Light extends React.Component {
 
         return (
             <div>
+                        <div>
                 <DenseAppBar />
-                <div style={{backgroundColor:'rgb(200,200,200)', height:'320px'}}>
-                    container
-                </div>
             </div>
+                        <MainLight/>
+                        
+                     </div>
         )
 
     }

@@ -1,11 +1,11 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
-import MySlider from './../utils/my-slider';
+import MySlider from '../../utils/my-slider';
 import axios from 'axios'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { url } from '../../config'
+import { url } from '../../../config'
 
 const style12 = {
     height: '140px',
