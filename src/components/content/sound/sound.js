@@ -9,10 +9,12 @@ import { url } from '../../../config'
 
 const style12 = {
     height: '140px',
+    padding:'0px',
     // border: '1px solid'
 }
 const style6 = {
     height: '120px',
+    padding:'0px'
     // border: '1px solid rgb(190,190,190)',
 
 }
@@ -86,9 +88,9 @@ class Sound extends React.Component {
         }
         return (
             < div >
-                <Grid style={styleContainer} container spacing={3}>
-                    <Grid container spacing={1} style={{margin:'10px'}} aling='center'>
-                            <Grid container spacing={3}>
+                <Grid style={styleContainer} container spacing={0}>
+                    <Grid container spacing={0} aling='center' style={{paddingRight:'-10px',marginRight:'20px' }}>
+                            <Grid container spacing={0} style={{marginTop:'10px', marginRight:'10px' }}>
                                 <Grid item xs={12} sm={2} align='center'>
                                     <IconButton onClick={this.handleClick}
                                         style={
@@ -102,7 +104,7 @@ class Sound extends React.Component {
                                         style={{ fontSize: 60 }} /></IconButton>
                                     {/* <button disabled>Restablecer</button> */}
                                 </Grid>
-                                <Grid item xs={12} sm={10}>
+                                <Grid item xs={12} sm={10} >
                                     <MySlider
                                         controls
                                         long='350px'
@@ -116,7 +118,7 @@ class Sound extends React.Component {
                                 </Grid>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={1} style={{margin:'10px'}} aling='center'>
+                    <Grid container spacing={1} style={{marginTop:'10px',marginRight:'10px', padding:'0px'}} aling='center'>
                         <Grid style={style6} item xs={12} sm={6}>
                             <MySlider
                                 id='bass'
@@ -140,7 +142,7 @@ class Sound extends React.Component {
                             />
                         </Grid>
                     </Grid>
-                    <Grid container spacing={1} style={{margin:'10px'}} aling='center'>
+                    <Grid container spacing={1} style={{marginTop:'10px',marginRight:'10px', padding:'0px'}} aling='center'>
 
                         <Grid style={style6} item xs={12} sm={6}>
                             <MySlider

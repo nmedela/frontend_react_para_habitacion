@@ -118,7 +118,7 @@ class MySlider extends React.Component {
                 <Grid container align='center' spacing={1}>
                     <Grid item xs={12} sm={12}>
 
-                        <Typography style={{ fontSize: '20px', border: '1px solid rgb(160,160,160)', borderRadius: '10px' }} align='center'  >
+                        <Typography style={{ fontSize: '20px', border: '1px solid rgb(160,160,160)', borderRadius: '20px', marginRight:'30px' }} align='center'  >
                             <span>
                                 {nameSlider + " "}
                             </span>
