@@ -90,7 +90,7 @@ class Sound extends React.Component {
             < div >
                 <Grid style={styleContainer} container spacing={0}>
                     <Grid container spacing={0} aling='center' style={{paddingRight:'-10px',marginRight:'20px' }}>
-                            <Grid container spacing={0} style={{marginTop:'10px', marginRight:'10px' }}>
+                            <Grid container spacing={0} style={{marginTop:'13px', marginRight:'10px' }}>
                                 <Grid item xs={12} sm={2} align='center'>
                                     <IconButton onClick={this.handleClick}
                                         style={
@@ -118,7 +118,7 @@ class Sound extends React.Component {
                                 </Grid>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={1} style={{marginTop:'10px',marginRight:'10px', padding:'0px'}} aling='center'>
+                    <Grid container spacing={1} style={{marginTop:'16px',marginRight:'10px', padding:'0px'}} aling='center'>
                         <Grid style={style6} item xs={12} sm={6}>
                             <MySlider
                                 id='bass'
@@ -142,7 +142,7 @@ class Sound extends React.Component {
                             />
                         </Grid>
                     </Grid>
-                    <Grid container spacing={1} style={{marginTop:'10px',marginRight:'10px', padding:'0px'}} aling='center'>
+                    <Grid container spacing={1} style={{marginTop:'17px',marginRight:'10px', padding:'0px'}} aling='center'>
 
                         <Grid style={style6} item xs={12} sm={6}>
                             <MySlider
