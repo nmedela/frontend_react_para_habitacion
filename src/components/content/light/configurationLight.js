@@ -4,8 +4,8 @@ class ConfigurationLight extends React.Component{
 
     render(){
         return(
-            <div>
-                Soy el progrmar
+            <div style={{backgroundColor:'green', height:'200px'}}> 
+                Soy el programar
             </div>
         )
     }

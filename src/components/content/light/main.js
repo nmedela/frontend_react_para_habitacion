@@ -5,7 +5,7 @@ class MainLight extends React.Component{
     render(){
         console.log("me renderice")
         return(
-            <div style={{backgroundColor:'black', height:'300px'}}> 
+            <div style={{backgroundColor:'black', height:'200px'}}> 
                 Soy el Main
             </div>
         )

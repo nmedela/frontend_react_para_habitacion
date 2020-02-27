@@ -1,6 +1,9 @@
 const pathIndex = [
     '/light',
-    '/sound'
+    '/sound',
+    '/light/scenes',
+    '/light/program',
+
 ]
 
 export default pathIndex

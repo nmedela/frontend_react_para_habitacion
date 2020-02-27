@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,7 +20,8 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'primary',
     },
     menuList: {
-        height: '60px',
+        height: '50px',
+        fontSize:'25px'
     },
 }));
 
@@ -65,8 +67,9 @@ export default function ButtonDesplegable() {
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
+                    style={{ color: 'white',width:'70px', height:'56px' }}
                 >
-                    <MenuIcon style={{ color: 'white' }} />
+                    <MenuIcon style={{ color: 'white', height:'50px' }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
@@ -77,9 +80,9 @@ export default function ButtonDesplegable() {
                             <Paper className={classes.paper} >
                                 <ClickAwayListener onClickAway={handleClose}>
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem className={classes.menuList} onClick={handleClose}>Principal</MenuItem>
-                                        <MenuItem className={classes.menuList} onClick={handleClose}>Escenas</MenuItem>
-                                        <MenuItem className={classes.menuList} onClick={handleClose}>Programar</MenuItem>
+                                        <MenuItem className={classes.menuList} onClick={handleClose}><a href="/light">Principal</a></MenuItem>
+                                        <MenuItem className={classes.menuList} onClick={handleClose}><a href="/light/scenes">Escenas</a></MenuItem>
+                                        <MenuItem className={classes.menuList} onClick={handleClose}><a href="/light/program">Programar</a></MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>

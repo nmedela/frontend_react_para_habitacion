@@ -8,6 +8,9 @@ import DenseAppBar from './components/menu/appBar'
 
 //se encuentran las rutas
 import pathIndex from './config'
+import MainLight from './components/content/light/main';
+import Scenes from './components/content/light/scenes';
+import ConfigurationLight from './components/content/light/configurationLight';
 
 const styleEncabezado = {
   backgroundColor: "black",
@@ -25,7 +28,7 @@ function App() {
         <div>
           <Switch>
             <Redirect from='/' exact to='/light' />
-            <Route path={pathIndex[0]} component={Light} exact />
+            <Route path={pathIndex[0]} component={Light} />} exact />
             <Route path={pathIndex[1]} component={Sound} exact />
           </Switch>
 
