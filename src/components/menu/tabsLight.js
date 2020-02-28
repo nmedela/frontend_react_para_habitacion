@@ -14,20 +14,9 @@ function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
     return (
-
-        // <Typography
-        //     component="div"
-        //     role="tabpanel"
-        //     hidden={value !== index}
-        //     id={`simple-tabpanel-${index}`}
-        //     aria-labelledby={`simple-tab-${index}`}
-        //     {...other}
-        // >
-     <div>
-        {value === index && <Box>{children}></Box>}
-     </div>
-        // {/* </Typography> */}
-        // );
+        <div>
+            {value === index && <Box>{children}</Box>}
+        </div>
     )
 }
 
@@ -48,14 +37,14 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         backgroundColor: 'theme.palette.background.paper',
-        
+
     },
 }));
-const styleTab ={
-    fontSize:'20px',
-    width:'300px',
-    backgroundColor:'brown',
-    height:'90px'
+const styleTab = {
+    fontSize: '20px',
+    width: '300px',
+    backgroundColor: 'brown',
+    height: '90px'
 }
 export default function MenuLight() {
     const classes = useStyles();
@@ -68,10 +57,10 @@ export default function MenuLight() {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Tabs value={value} centered onChange={handleChange} fullWidth> 
-                    <Tab label="Principal" {...a11yProps(0)} style={styleTab} />
-                    <Tab label="Escenas" {...a11yProps(1)} style={styleTab}/>
-                    <Tab label="Programar" {...a11yProps(2)} style={styleTab}/>
+                <Tabs value={value} centered onChange={handleChange} fullWidth>
+                    <Tab label="Principal"  style={styleTab} />
+                    <Tab label="Escenas"  style={styleTab} />
+                    <Tab label="Programar" style={styleTab} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>

@@ -1,12 +1,11 @@
 import React from 'react'
 
-class MainLight extends React.Component{
+class MainLight extends React.Component {
 
-    render(){
-        console.log("me renderice")
-        return(
-            <div style={{backgroundColor:'black', height:'200px'}}> 
-                Soy el Main
+    render() {
+        return (
+            <div style={{align:'center', backgroundColor: 'black', height: '200px' }}>
+                <button>Principal</button>
             </div>
         )
     }

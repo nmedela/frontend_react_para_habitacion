@@ -28,7 +28,7 @@ function App() {
         <div>
           <Switch>
             <Redirect from='/' exact to='/light' />
-            <Route path={pathIndex[0]} component={Light} />} exact />
+            <Route path={pathIndex[0]} component={Light} exact />
             <Route path={pathIndex[1]} component={Sound} exact />
           </Switch>
 

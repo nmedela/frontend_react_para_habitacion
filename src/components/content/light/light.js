@@ -41,15 +41,9 @@ class Light extends React.Component {
                     </Grid>
                 </div>)
         }
-
         return (
             <div>
-                <div>
-                    <MenuLight />
-                </div>
-
-                {this.props.content}
-
+                <MenuLight />
             </div>
         )
 
