@@ -74,7 +74,7 @@ export default function StepperProgram() {
 
     return (
         <div className={classes.root}>
-            <Stepper activeStep={activeStep} orientation="vertical">
+            <Stepper activeStep={activeStep} orientation="horizontal">
                 {steps.map((label, index) => (
                     <Step key={label}>
                         {/* <StepLabel>{label}</StepLabel> */}
@@ -105,10 +105,13 @@ export default function StepperProgram() {
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>All steps completed - you&apos;re finished</Typography>
-                    <Button onClick={handleReset} className={classes.button}>
+                    <Typography>Listo Papuni</Typography>
+                    {/* <Button onClick={handleReset} className={classes.button}>
                         Reset
           </Button>
+                    <Button onClick={handleClose} className={classes.button}>
+                        ok
+          </Button> */}
                 </Paper>
             )}
         </div>

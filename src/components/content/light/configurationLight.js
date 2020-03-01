@@ -140,14 +140,14 @@ export function DialogLight() {
                        <StepperProgram/>
             </DialogContentText>
                 </DialogContent>
-                {/* <DialogActions>
+                <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">
                         Cancel
             </Button>
                     <Button onClick={handleClose} color="primary">
                         Aceptar
             </Button>
-                </DialogActions> */}
+                </DialogActions>
             </Dialog>
         </div>
     );
