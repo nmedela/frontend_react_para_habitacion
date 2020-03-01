@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
         border: '2px solid rgb(140,140,140)',
         cursor: 'none'
     },
+    buttonConfirm: {
+        width: '50px',
+    },
     root: {
         flexGrow: 1,
         backgroundColor: 'rgb(200,200,200)',
@@ -80,9 +83,9 @@ export default function ConfigurationLight() {
     const handleOpen = () => {
         setOpen(true);
     };
-    // const dialog= ()=>{
-    //     return(<DialogLight/>)
-    // }
+    const dialog = () => {
+        return (<DialogLight />)
+    }
     return (
         <div>
             <div className={classes.root}>
@@ -107,7 +110,7 @@ export default function ConfigurationLight() {
 }
 function PaperComponent(props) {
     return (
-        <Paper {...props} />
+        <Paper  style={{ width: '750px',height:'480px' }} {...props} />
     );
 }
 export function DialogLight() {
@@ -122,23 +125,21 @@ export function DialogLight() {
     };
 
     return (
-        <div>
-            <Fab className={classes.buttonMain} onClick={handleClickOpen}color="primary" aria-label="add">
+        <div >
+            <Fab className={classes.buttonMain} onClick={handleClickOpen} color="primary" aria-label="add">
                 <AddIcon />
             </Fab>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
-                aria-labelledby="draggable-dialog-title"
+               
+            // aria-labelledby="draggable-dialog-title"
             >
-                {/* <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                    Subscribe
-          </DialogTitle> */}
                 <DialogContent>
                     <DialogContentText>
-                       <StepperProgram/>
-            </DialogContentText>
+                        <StepperProgram />
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">

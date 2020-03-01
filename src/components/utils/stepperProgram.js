@@ -9,6 +9,16 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import RadioButtonsGroup from './../utils/radioOptions'
+import SetTimeContent from './../content/light/setTimeContent'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,34 +37,42 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-    return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+    return ['Seleccionar frecuencia', 'Elegir tiempo', 'Modo de accionar', 'Luz'];
 }
 
 function getStepContent(step) {
     switch (step) {
         case 0:
             return (
-                <List>
-                    {[1,2,3].map(e=>
-                        <ListItem><button>{e}</button></ListItem>
-                    )
-                    }
-                </List>
-
+                <RadioButtonsGroup options={getOptions()} />
             );
         case 1:
             return (
-                <button style={{ height: '250px' }}>Aca iria una lista</button>)
+                <SetTimeContent />
+            )
         case 2:
-            return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
+            return (
+                <RadioButtonsGroup options={getItems()} />
+                )
+                
+        case 3:
+            return (
+                <RadioButtonsGroup options={getLights()} />
+            )
+
         default:
             return 'Unknown step';
     }
 }
-
+function getOptions() {
+    return ['Solo 1 vez', 'Siempre']
+}
+function getItems() {
+    return ['Prender', 'Escenas', 'Apagar']
+}
+function getLights() {
+    return ['Todas', 'Principal', 'L1', 'L2']
+}
 export default function StepperProgram() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -77,7 +95,9 @@ export default function StepperProgram() {
             <Stepper activeStep={activeStep} orientation="horizontal">
                 {steps.map((label, index) => (
                     <Step key={label}>
-                        {/* <StepLabel>{label}</StepLabel> */}
+                        <StepLabel>
+                            {/* {label} */}
+                        </StepLabel>
                         <StepContent>
                             <Typography>{getStepContent(index)}</Typography>
                             <div className={classes.actionsContainer}>
