@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
     demo: {
         backgroundColor: theme.palette.background.paper,
+        width:"500px"
     },
     title: {
         margin: theme.spacing(4, 0, 2),
@@ -54,7 +55,7 @@ export default function ListProgram() {
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary="Single-line item"
+                                        primary="Single-line item y capaz mas largo "
                                         secondary={secondary ? 'Secondary text' : null}
                                     />
                                     <ListItemSecondaryAction>
