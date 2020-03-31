@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -19,6 +19,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioButtonsGroup from './../utils/radioOptions'
 import SetTimeContent from './../content/light/setTimeContent'
+import LightService from './../../services/lightService'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,49 +36,72 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3),
     },
 }));
+const service = new LightService()
 
-function getSteps() {
-    return ['Seleccionar frecuencia', 'Elegir tiempo', 'Modo de accionar', 'Luz'];
+const getSteps = () => {
+    return service.getSteps().then((res) => {
+        return res
+    })
 }
 
-function getStepContent(step) {
+// function getSteps() {
+
+//     return ['Seleccionar frecuencia', 'Elegir tiempo', 'Modo de accionar', 'Luz'];
+// }
+
+function getStepContent(step, label) {
+    // var titulos= label.map(e =>e.list.title )
     switch (step) {
         case 0:
+            var titulos = []
+            label.map((e) => { (titulos.push(e.title)) })
             return (
-                <RadioButtonsGroup options={getOptions()} />
+                <RadioButtonsGroup options={titulos} />
             );
         case 1:
+            var titulos = []
+            label.map((e) => { (titulos.push(e.title)) })
             return (
-                <SetTimeContent />
+                < RadioButtonsGroup options={titulos} />
             )
         case 2:
+            var titulos = []
+            label.map((e) => { (titulos.push(e.title)) })
             return (
-                <RadioButtonsGroup options={getItems()} />
-                )
-                
+                <RadioButtonsGroup options={titulos} />
+            )
+
         case 3:
+            var titulos = []
+            label.map((e) => { (titulos.push(e.title)) })
             return (
-                <RadioButtonsGroup options={getLights()} />
+                <SetTimeContent />
             )
 
         default:
             return 'Unknown step';
     }
 }
-function getOptions() {
-    return ['Solo 1 vez', 'Siempre']
-}
-function getItems() {
-    return ['Prender', 'Escenas', 'Apagar']
-}
-function getLights() {
-    return ['Todas', 'Principal', 'L1', 'L2']
-}
+
+
 export default function StepperProgram() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [steps, setSteps] = React.useState(null);
 
+    useEffect(() => {
+        if (isLoading) {
+
+            var valor = getSteps()
+            valor.then((res) => {
+                setSteps(res)
+                setIsLoading(false)
+
+            })
+        }
+
+    })
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
     };
@@ -91,15 +115,15 @@ export default function StepperProgram() {
     };
 
     return (
-        <div className={classes.root}>
+        !isLoading && <div className={classes.root}>
             <Stepper activeStep={activeStep} orientation="horizontal">
                 {steps.map((label, index) => (
-                    <Step key={label}>
+                    <Step key={label.title}>
                         <StepLabel>
-                            {/* {label} */}
+                            {/* { label.title } */}
                         </StepLabel>
                         <StepContent>
-                            <Typography>{getStepContent(index)}</Typography>
+                            <Typography>{getStepContent(index, label.list)}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button

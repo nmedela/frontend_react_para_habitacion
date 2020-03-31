@@ -17,6 +17,13 @@ class LightService {
             return res.data
         })
     }
+
+    getSteps=() =>{
+        return  axios.get(`http://${url}/light/steps`)
+        .then((res)=>{
+            return res.data
+        })
+    }
 }
 
 export default LightService
