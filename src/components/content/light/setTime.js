@@ -10,52 +10,64 @@ class SetTime extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            index:0,
-            value:0
+            index: 0,
+            value: 0,
+            time: props.minutes ? minutes : hours
         }
 
     }
 
     add = () => {
-        if (this.state.index != minutes.length){
-            this.setState({
-                index: this.state.index + 1
+        if (this.state.index != this.state.time.length - 1) {
+            this.setState((state) => {
+                return { index: state.index + 1 }
             })
-            this.setState({
-                value: minutes[this.state.index]
+        } else {
+            this.setState((state) => {
+                return { index: 0 }
             })
+
         }
+        this.setState((state) => {
+            return { value: state.time[state.index] }
+        })
     }
 
     sub = () => {
-        if (this.state.index != 0){
-            this.setState({
-                index: this.state.index - 1
+        if (this.state.index != 0) {
+            this.setState((state) => {
+                return { index: state.index - 1 }
             })
-            this.setState({
-                value: minutes[this.state.index]
+        } else {
+            this.setState((state) => {
+                return { index: state.time.length - 1 }
             })
+
         }
+        this.setState((state) => {
+            return { value: state.time[state.index] }
+        })
     }
 
     render() {
         return (
             <div>
-                <Button style={{ margin: '20px', width:'30px'  }} onClick={this.sub} variant="contained" color="secondary">
-               -
+                <Button style={{ margin: '20px', width: '30px' }} onClick={this.sub} variant="contained" color="secondary">
+                    -
       </Button>
                 <Input
-                style={{width:'40px', fontSize:20}}
+                    style={{ width: '40px', fontSize: 20 }}
                     readOnly
                     id="outlined-number"
                     label="Number"
                     variant="outlined"
                     value={this.state.value}
-                    
+
                 />
-                <Button style={{ margin: '20px' ,width:'30px' }} onClick={this.add} variant="contained" color="secondary">
+                <Button style={{ margin: '20px', width: '30px' }} onClick={this.add} variant="contained" color="secondary">
                     +
-      </Button>
+      </Button>{this.props.minutes ? 'Min' : 'Hs'}
+
             </div>
         )
     }

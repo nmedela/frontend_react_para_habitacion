@@ -9,9 +9,9 @@ class SetTimeContent extends React.Component {
     render() {
 
         return (<div>
-            <SetTime/>
-<br></br>
-            <SetTime/>
+            <SetTime hours />
+            <br></br>
+            <SetTime minutes />
         </div>
         )
     }
