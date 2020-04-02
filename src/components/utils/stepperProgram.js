@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
     },
     resetContainer: {
         padding: theme.spacing(3),
+        textAlign: 'center'
     },
 }));
 const service = new LightService()
@@ -49,33 +50,42 @@ const getSteps = () => {
 //     return ['Seleccionar frecuencia', 'Elegir tiempo', 'Modo de accionar', 'Luz'];
 // }
 
-function getStepContent(step, label) {
-    // var titulos= label.map(e =>e.list.title )
+function getStepContent(step, label, handleChangeOption, object) {
+
+
+    const handleSelected = (objeto) => {
+        console.log('asi está el selected ', objeto)
+        handleChangeOption(objeto)
+    }
+
     switch (step) {
         case 0:
             var titulos = []
             label.map((e) => { (titulos.push(e.title)) })
             return (
-                <RadioButtonsGroup options={titulos} />
+                //Frecuencia
+                <RadioButtonsGroup handleSelected={handleSelected} object={object} step={step} options={titulos} />
             );
         case 1:
             var titulos = []
             label.map((e) => { (titulos.push(e.title)) })
             return (
-                < RadioButtonsGroup options={titulos} />
+                //Accion
+                < RadioButtonsGroup handleSelected={handleSelected} object={object} step={step} options={titulos} />
             )
         case 2:
             var titulos = []
             label.map((e) => { (titulos.push(e.title)) })
             return (
-                <RadioButtonsGroup options={titulos} />
+                //Luz
+                <RadioButtonsGroup handleSelected={handleSelected} object={object} step={step} options={titulos} />
             )
 
         case 3:
             var titulos = []
             label.map((e) => { (titulos.push(e.title)) })
             return (
-                <SetTimeContent />
+                <SetTimeContent handleSelected={handleSelected} repeat={object[0].value == 1 ? true : false } object={object} step={step} />
             )
 
         default:
@@ -84,11 +94,22 @@ function getStepContent(step, label) {
 }
 
 
-export default function StepperProgram() {
+export default function StepperProgram(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLoading, setIsLoading] = React.useState(true);
     const [steps, setSteps] = React.useState(null);
+    const [selectedObject, setSelectedObject] = React.useState([
+        { value: null },
+        { value: null },
+        { value: null },
+        { value: null },
+    ]);
+
+    const handleChangeOption = (o, step, e) => {
+        setSelectedObject(o)
+        console.log('Esto es el handle prueba ', step, e)
+    }
 
     useEffect(() => {
         if (isLoading) {
@@ -123,7 +144,7 @@ export default function StepperProgram() {
                             {/* { label.title } */}
                         </StepLabel>
                         <StepContent>
-                            <Typography>{getStepContent(index, label.list)}</Typography>
+                            <Typography>{getStepContent(index, label.list, handleChangeOption, selectedObject)}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
@@ -148,14 +169,17 @@ export default function StepperProgram() {
                 ))}
             </Stepper>
             {activeStep === steps.length && (
-                <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>Listo Papuni</Typography>
+                <Paper square elevation={3} className={classes.resetContainer}>
+                    <Typography>Listo Papuni {JSON.stringify(selectedObject)}</Typography>
                     {/* <Button onClick={handleReset} className={classes.button}>
                         Reset
-          </Button>
-                    <Button onClick={handleClose} className={classes.button}>
-                        ok
           </Button> */}
+                    <Button onClick={props.handleClose}
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}>
+                        ok
+          </Button>
                 </Paper>
             )}
         </div>

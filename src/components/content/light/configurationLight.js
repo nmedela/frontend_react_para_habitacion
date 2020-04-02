@@ -117,6 +117,7 @@ export function DialogLight() {
     const [open, setOpen] = React.useState(false);
     const classes = useStyles();
     const handleClickOpen = () => {
+        console.log('le di abrir')
         setOpen(true);
     };
 
@@ -138,17 +139,17 @@ export function DialogLight() {
             >
                 <DialogContent>
                     <DialogContentText>
-                        <StepperProgram />
+                        <StepperProgram handleClose ={handleClose} />
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                {/* <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">
                         Cancel
             </Button>
                     <Button onClick={handleClose} color="primary">
                         Aceptar
             </Button>
-                </DialogActions>
+                </DialogActions> */}
             </Dialog>
         </div>
     );
