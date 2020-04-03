@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +17,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import StepperProgram from '../../utils/stepperProgram';
+import LightService from './../../../services/lightService'
+
 // import Paper from '@material-ui/core/Paper';
 // import DialogLight from './../../utils/dialogLight'
 
@@ -66,11 +68,20 @@ const useStyles = makeStyles(theme => ({
         cursor: 'none'
     }
 }));
+const service = new LightService()
 
 export default function ConfigurationLight() {
     const classes = useStyles();
     const [age, setAge] = React.useState('');
     const [open, setOpen] = React.useState(false);
+    const [listProgram, setListProgram] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(true)
+
+    useEffect(() => {
+      if(isLoading){
+          getListProgram()
+      }
+    })
 
     const handleChange = event => {
         setAge(event.target.value);
@@ -78,7 +89,23 @@ export default function ConfigurationLight() {
 
     const handleClose = () => {
         setOpen(false);
+        refreshList()
+        
     };
+    const refreshList =()=>{
+        setIsLoading(true)
+        getListProgram()
+
+    }
+    const getListProgram = () => {
+        if(isLoading){
+            return service.getOptions()
+            .then((newList)=>{
+                setListProgram(newList)
+                setIsLoading(false)
+            })
+        }
+    }
 
     const handleOpen = () => {
         setOpen(true);
@@ -93,14 +120,14 @@ export default function ConfigurationLight() {
                     <Grid item xs={12} sm={4} >
                         <Grid item xs={12} sm={12} >
                             <div className={classes.paperSelect}>
-                                <DialogLight />
+                                <DialogLight handleClose={handleClose} />
                             </div>
                         </Grid>
 
                     </Grid>
                     <Grid item xs={12} sm={8} >
                         <div className={classes.paperScenes}>
-                            <ListProgram />
+                            {!isLoading ? <ListProgram handleRefreshList={refreshList} list={listProgram} /> : 'No hay programas'}
                         </div>
                     </Grid>
                 </Grid>
@@ -110,10 +137,10 @@ export default function ConfigurationLight() {
 }
 function PaperComponent(props) {
     return (
-        <Paper  style={{ width: '750px',height:'480px' }} {...props} />
+        <Paper style={{ width: '750px', height: '480px' }} {...props} />
     );
 }
-export function DialogLight() {
+export function DialogLight(props) {
     const [open, setOpen] = React.useState(false);
     const classes = useStyles();
     const handleClickOpen = () => {
@@ -122,8 +149,8 @@ export function DialogLight() {
 
     const handleClose = () => {
         setOpen(false);
-    };
-
+        props.handleClose()
+    }
     return (
         <div >
             <Fab className={classes.buttonMain} onClick={handleClickOpen} color="primary" aria-label="add">
@@ -133,12 +160,12 @@ export function DialogLight() {
                 open={open}
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
-               
+
             // aria-labelledby="draggable-dialog-title"
             >
                 <DialogContent>
                     <DialogContentText>
-                        <StepperProgram handleClose ={handleClose} />
+                        <StepperProgram handleClose={handleClose} />
                     </DialogContentText>
                 </DialogContent>
                 {/* <DialogActions>

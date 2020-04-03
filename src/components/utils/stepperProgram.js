@@ -21,6 +21,7 @@ import RadioButtonsGroup from './../utils/radioOptions'
 import SetTimeContent from './../content/light/setTimeContent'
 import LightService from './../../services/lightService'
 import { url } from '../../config'
+import moment from'moment'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -106,7 +107,6 @@ export default function StepperProgram(props) {
     ]);
     const handleChangeOption = (o, step, e) => {
         setSelectedObject(o)
-        console.log('Esto es el handle prueba ', selectedObject)
     }
     useEffect(() => {
         if (isLoading) {
@@ -126,19 +126,20 @@ export default function StepperProgram(props) {
     const builder = () => {
         var option =
         {
-            started: Date.now(),
+            started: moment(),
             frecuency:  selectedObject[0].value,
             action:selectedObject[1].value,
             light:steps[2].list[selectedObject[2].value],
             time:selectedObject[3].value
         }
         
-        console.log('esto es lo que voy a mandar ',option)
         return option
     }
     const sendRequest = () => {
         var object = builder()
-        service.setOption(object)
+        service.setOption(object).then((res)=>{
+            props.handleClose()
+        })
     }
 
     return (
@@ -176,12 +177,12 @@ export default function StepperProgram(props) {
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={3} className={classes.resetContainer}>
-                    <Typography>Se enviará la solicitud </Typography>
+                    <Typography>{'Se enviará la solicitud'} </Typography>
                     {/* {JSON.stringify(selectedObject)} */}
                     {/* <Button onClick={handleReset} className={classes.button}>
                         Reset
           </Button> */}
-                    <Button onClick={sendRequest} //props.handleClose }
+                    <Button onClick={sendRequest}
                         variant="contained"
                         color="primary"
                         className={classes.button}>

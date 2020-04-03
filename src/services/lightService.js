@@ -31,7 +31,18 @@ class LightService {
                 return res.data
             })
     }
-
+    getOptions = () => {
+        return axios.get(`http://${url}/light/program/all`)
+            .then((res) => {
+                return res.data
+            })
+    }
+    deleteOption = (id) => {
+        return axios.delete(`http://${url}/light/program/${id}`)
+        .then((res) => {
+            return res.data
+        })
+    }
 
 }
 

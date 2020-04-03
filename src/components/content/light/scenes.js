@@ -80,7 +80,6 @@ export default function Scenes() {
     const [open, setOpen] = React.useState(false);
     const getAll = () => {
         return service.getAll().then((res) => {
-            console.log("Acá trae esto ", res)
             return res
         })
 
@@ -100,7 +99,6 @@ export default function Scenes() {
     
     const changeIntensity = (value) => {
         var newLights = lights
-        console.log("el valor que trae el boton ", value)
         newLights[selected].intensity = value
         setLights(newLights)
         service.setScene(newLights[selected])
@@ -108,7 +106,6 @@ export default function Scenes() {
     }
     const handleClick = event => {
         var newLights = lights
-        console.log("el valor que trae el boton ", event.target.id)
         newLights[selected].intensity = event.target.id
         setLights(newLights)
         service.setScene(newLights[selected])
