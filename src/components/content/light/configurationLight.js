@@ -117,7 +117,6 @@ export function DialogLight() {
     const [open, setOpen] = React.useState(false);
     const classes = useStyles();
     const handleClickOpen = () => {
-        console.log('le di abrir')
         setOpen(true);
     };
 

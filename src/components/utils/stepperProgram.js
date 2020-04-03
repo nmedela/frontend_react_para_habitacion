@@ -20,6 +20,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import RadioButtonsGroup from './../utils/radioOptions'
 import SetTimeContent from './../content/light/setTimeContent'
 import LightService from './../../services/lightService'
+import { url } from '../../config'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -52,9 +53,7 @@ const getSteps = () => {
 
 function getStepContent(step, label, handleChangeOption, object) {
 
-
     const handleSelected = (objeto) => {
-        console.log('asi está el selected ', objeto)
         handleChangeOption(objeto)
     }
 
@@ -85,7 +84,7 @@ function getStepContent(step, label, handleChangeOption, object) {
             var titulos = []
             label.map((e) => { (titulos.push(e.title)) })
             return (
-                <SetTimeContent handleSelected={handleSelected} repeat={object[0].value == 1 ? true : false } object={object} step={step} />
+                <SetTimeContent handleSelected={handleSelected} repeat={object[0].value == 1 ? true : false} object={object} step={step} />
             )
 
         default:
@@ -105,35 +104,42 @@ export default function StepperProgram(props) {
         { value: null },
         { value: null },
     ]);
-
     const handleChangeOption = (o, step, e) => {
         setSelectedObject(o)
-        console.log('Esto es el handle prueba ', step, e)
+        console.log('Esto es el handle prueba ', selectedObject)
     }
-
     useEffect(() => {
         if (isLoading) {
-
             var valor = getSteps()
             valor.then((res) => {
                 setSteps(res)
                 setIsLoading(false)
-
             })
         }
-
     })
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
     };
-
     const handleBack = () => {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
     };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
+    const builder = () => {
+        var option =
+        {
+            started: Date.now(),
+            frecuency:  selectedObject[0].value,
+            action:selectedObject[1].value,
+            light:steps[2].list[selectedObject[2].value],
+            time:selectedObject[3].value
+        }
+        
+        console.log('esto es lo que voy a mandar ',option)
+        return option
+    }
+    const sendRequest = () => {
+        var object = builder()
+        service.setOption(object)
+    }
 
     return (
         !isLoading && <div className={classes.root}>
@@ -170,11 +176,12 @@ export default function StepperProgram(props) {
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={3} className={classes.resetContainer}>
-                    <Typography>Listo Papuni {JSON.stringify(selectedObject)}</Typography>
+                    <Typography>Se enviará la solicitud </Typography>
+                    {/* {JSON.stringify(selectedObject)} */}
                     {/* <Button onClick={handleReset} className={classes.button}>
                         Reset
           </Button> */}
-                    <Button onClick={props.handleClose}
+                    <Button onClick={sendRequest} //props.handleClose }
                         variant="contained"
                         color="primary"
                         className={classes.button}>

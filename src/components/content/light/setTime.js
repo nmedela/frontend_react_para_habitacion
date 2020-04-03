@@ -29,10 +29,14 @@ class SetTime extends React.Component {
 
         }
         this.setState((state) => {
+            this.sendValue(state.time[state.index])
             return { value: state.time[state.index] }
         })
     }
+    sendValue = (val) => {
+        this.props.handleValue(val)
 
+    }
     sub = () => {
         if (this.state.index != 0) {
             this.setState((state) => {
@@ -45,6 +49,7 @@ class SetTime extends React.Component {
 
         }
         this.setState((state) => {
+            this.sendValue(state.time[state.index])
             return { value: state.time[state.index] }
         })
     }
