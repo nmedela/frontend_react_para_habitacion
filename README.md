@@ -17,21 +17,21 @@ Programacion-> vista de programas creados. Posibilidad de setear un cronograma d
 
 Sonido:
 
-![alt text](Images/screen_primary.png)
+![alt text](Images/screen_sound.png)
 
 Luces:
     Principal:
 
-![alt text](images/screen_primary.png)
+![alt text](Images/screen_primary.png)
 
     Escenas:
 
-![alt text](images/screen_scenes.png)
+![alt text](Images/screen_scenes.png)
 
     Porgramar:
 
-![alt text](images/screen_program.png)
+![alt text](Images/screen_program.png)
 
     Pasos:
-![alt text](images/screen_stepper.png)
+![alt text](Images/screen_stepper.png)
 
