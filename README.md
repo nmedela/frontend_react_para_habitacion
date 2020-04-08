@@ -4,6 +4,8 @@ Todas las solicitudes son enviadas a localhost:4000
 Repo de proyecto backend:
 https://github.com/nmedela/Node-Habitacion/tree/creacionDemonio
 
+El proyecto está configurado para trabajar en una pantalla tactil de 5pulgadas de 800x480px en una RPi
+
 Idea:
 Tener 2 opciones: Control de luces y sonido.
 En la seccion de sonido tenemos disponible el manejo del amplificador.
@@ -14,3 +16,22 @@ Escenas-> Seleccion de luz para dimerizar y seteo de escenas predefinidas
 Programacion-> vista de programas creados. Posibilidad de setear un cronograma de escenas para las luces a X horarios.
 
 Sonido:
+
+![alt text](images/screen_sound.png)
+
+Luces:
+    Principal:
+
+![alt text](images/screen_primary.png)
+
+    Escenas:
+
+![alt text](images/screen_scenes.png)
+
+    Porgramar:
+
+![alt text](images/screen_program.png)
+
+    Pasos:
+![alt text](images/screen_stepper.png)
+
