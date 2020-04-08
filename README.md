@@ -17,7 +17,7 @@ Programacion-> vista de programas creados. Posibilidad de setear un cronograma d
 
 Sonido:
 
-![alt text](images/screen_sound.png)
+![alt text](/images/screen_sound.png)
 
 Luces:
     Principal:
