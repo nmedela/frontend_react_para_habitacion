@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 const service = new LightService()
-const interval= 0
+var interval = 0
 export default function ConfigurationLight() {
     const classes = useStyles();
     const [age, setAge] = React.useState('');
@@ -78,11 +78,17 @@ export default function ConfigurationLight() {
     const [isLoading, setIsLoading] = React.useState(true)
 
     useEffect(() => {
-      if(isLoading){
-          getListProgram()
-      }
+        if (isLoading) {
+            getListProgram()
+        }
     })
-
+    useEffect(() => {
+       
+        interval = setInterval(refreshList,60000)
+        return () => {
+            clearInterval(interval)
+        }
+    }, [])
     const handleChange = event => {
         setAge(event.target.value);
     };
@@ -90,20 +96,20 @@ export default function ConfigurationLight() {
     const handleClose = () => {
         setOpen(false);
         refreshList()
-        
+
     };
-    const refreshList =()=>{
+    const refreshList = () => {
         setIsLoading(true)
         getListProgram()
 
     }
     const getListProgram = () => {
-        if(isLoading){
+        if (isLoading) {
             return service.getOptions()
-            .then((newList)=>{
-                setListProgram(newList)
-                setIsLoading(false)
-            })
+                .then((newList) => {
+                    setListProgram(newList)
+                    setIsLoading(false)
+                })
         }
     }
 
