@@ -80,6 +80,7 @@ export default function Scenes() {
     const [open, setOpen] = React.useState(false);
     const getAll = () => {
         return service.getAll().then((res) => {
+            console.log(res)
             return res
         })
 
@@ -94,26 +95,24 @@ export default function Scenes() {
                 setIsLoading(false)
             })
         }
-        
+
     })
-    
+
     const changeIntensity = (value) => {
         var newLights = lights
-        newLights[selected].intensity = value
+        var index = newLights.findIndex( e => e.id == selected)
+        newLights[index].intensity = value
         setLights(newLights)
-        service.setScene(newLights[selected])
+        service.setScene(newLights[index])
 
     }
-    const handleClick = event => {
-        var newLights = lights
-        newLights[selected].intensity = event.target.id
-        setLights(newLights)
-        service.setScene(newLights[selected])
-    }
-    const handleChange = event => {
-        setSelected(event.target.value);
+  
+    const handleChange = (event) => {
+        changeSelected(event)
     };
-
+    const changeSelected =(event)=>{
+        setSelected(event.target.value)  
+    }
     const handleClose = () => {
         setOpen(false);
     };
@@ -121,7 +120,6 @@ export default function Scenes() {
     const handleOpen = () => {
         setOpen(true);
     };
-
 
     return (
 
@@ -141,12 +139,12 @@ export default function Scenes() {
                                         onClose={handleClose}
                                         onOpen={handleOpen}
                                         value={selected}
-                                        onChange={handleChange}
+                                        onChange={e=>handleChange(e)}
                                     >
                                         {
                                             lights.map((e) => {
                                                 return (
-                                                    <MenuItem className={classes.menuItem} value={e.id}>{e.id}</MenuItem>
+                                                    <MenuItem className={classes.menuItem} value={e.id}>{e.title}</MenuItem>
                                                 )
                                             })
                                         }
@@ -163,12 +161,12 @@ export default function Scenes() {
                     </Grid>
                     <Grid item xs={12} sm={8} >
                         <div className={classes.paperScenes}>
-                            <Button variant="contained" color="Primary" id="36" onClick={()=>changeIntensity(36)} className={classes.buttonScenes}>Apagado</Button>
-                            <Button variant="contained" color="Primary" id="30" onClick={()=>changeIntensity(30)} className={classes.buttonScenes}>Tenue</Button>
+                            <Button variant="contained" color="Primary" id="36" onClick={() => changeIntensity(36)} className={classes.buttonScenes}>Apagado</Button>
+                            <Button variant="contained" color="Primary" id="30" onClick={() => changeIntensity(30)} className={classes.buttonScenes}>Tenue</Button>
                         </div>
                         <div className={classes.paperScenes}>
-                            <Button variant="contained" color="Primary" id="24" onClick={()=>changeIntensity(24)} className={classes.buttonScenes}>Agradable</Button>
-                            <Button variant="contained" color="Primary" id="10" onClick={()=>changeIntensity(10)} className={classes.buttonScenes}>Full</Button>
+                            <Button variant="contained" color="Primary" id="24" onClick={() => changeIntensity(24)} className={classes.buttonScenes}>Agradable</Button>
+                            <Button variant="contained" color="Primary" id="10" onClick={() => changeIntensity(10)} className={classes.buttonScenes}>Full</Button>
                         </div>
                     </Grid>
                 </Grid>
