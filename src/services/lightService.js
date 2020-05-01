@@ -23,7 +23,13 @@ class LightService {
             return res.data
         })
     }
-
+    changePrincial =()=>{
+        return axios.post(`http://${url}/light/principal`, )
+        .then((res) => {
+            console.log(res)
+            return res.data
+        })
+    }
     getSteps = () => {
         return axios.get(`http://${url}/light/steps`)
             .then((res) => {

@@ -86,8 +86,8 @@ export default function Scenes() {
         })
     }
 
-    const getScenes =()=>{
-        return service.getScenes().then((res)=>{
+    const getScenes = () => {
+        return service.getScenes().then((res) => {
             return res
         })
     }
@@ -96,33 +96,34 @@ export default function Scenes() {
 
             var valor = getAll()
             var scenes = getScenes()
-            scenes.then((res) =>{
-                setScenes(res)
-            })
             valor.then((res) => {
                 setLights(res)
-                setSelected(0)
-                setIsLoading(false)
+                scenes.then((respo) => {
+                    console.log("esto trae scenes ", respo)
+                    setScenes(respo)
+                    setSelected(0)
+                    setIsLoading(false)
+                })
             })
-            
+
         }
 
     })
 
     const changeIntensity = (value) => {
         var newLights = lights
-        var index = newLights.findIndex( e => e.id == selected)
+        var index = newLights.findIndex(e => e.id == selected)
         newLights[index].intensity = value
         setLights(newLights)
         service.setScene(newLights[index])
 
     }
-  
+
     const handleChange = (event) => {
         changeSelected(event)
     };
-    const changeSelected =(event)=>{
-        setSelected(event.target.value)  
+    const changeSelected = (event) => {
+        setSelected(event.target.value)
     }
     const handleClose = () => {
         setOpen(false);
@@ -131,7 +132,9 @@ export default function Scenes() {
     const handleOpen = () => {
         setOpen(true);
     };
-
+    const hola=()=>{
+        alert("lalalal")
+    }
     return (
 
         <div>
@@ -150,7 +153,7 @@ export default function Scenes() {
                                         onClose={handleClose}
                                         onOpen={handleOpen}
                                         value={selected}
-                                        onChange={e=>handleChange(e)}
+                                        onChange={e => handleChange(e)}
                                     >
                                         {
                                             lights.map((e) => {
@@ -166,18 +169,18 @@ export default function Scenes() {
                         </Grid>
                         <Grid item xs={12} sm={12} >
                             <div className={classes.paperMain}>
-                                <Button variant="contained" className={classes.buttonMain}>Principal</Button>
+                                <Button variant="contained" onClick={()=>{service.changePrincial()}} className={classes.buttonMain}>Principal</Button>
                             </div>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sm={8} >
                         <div className={classes.paperScenes}>
-                            <Button variant="contained" color="Primary" id={scenes[0].title} onClick={() => changeIntensity(scenes[0].intensity)} className={classes.buttonScenes}>scenes[0].title</Button>
-                            <Button variant="contained" color="Primary" id={scenes[1].title} onClick={() => changeIntensity(scenes[1].intensity)} className={classes.buttonScenes}>scenes[1].title</Button>
+                            <Button variant="contained" color="Primary" onClick={() => changeIntensity(scenes[0].intensity)} className={classes.buttonScenes}>{scenes[0].title}</Button>
+                            <Button variant="contained" color="Primary" onClick={() => changeIntensity(scenes[1].intensity)} className={classes.buttonScenes}>{scenes[1].title}</Button>
                         </div>
                         <div className={classes.paperScenes}>
-                            <Button variant="contained" color="Primary" id={scenes[2].title} onClick={() => changeIntensity(scenes[2].intensity)} className={classes.buttonScenes}>scenes[2].title</Button>
-                            <Button variant="contained" color="Primary" id={scenes[3].title} onClick={() => changeIntensity(scenes[3].intensity)} className={classes.buttonScenes}>scenes[3].title</Button>
+                            <Button variant="contained" color="Primary" onClick={() => changeIntensity(scenes[2].intensity)} className={classes.buttonScenes}>{scenes[2].title}</Button>
+                            <Button variant="contained" color="Primary" onClick={() => changeIntensity(scenes[3].intensity)} className={classes.buttonScenes}>{ scenes[3].title}</Button>
                         </div>
                     </Grid>
                 </Grid>

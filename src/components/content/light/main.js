@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import LightService from './../../../services/lightService'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
         height: '258px'
     },
 }));
+const service = new LightService()
 
 export default function MainLight() {
     const classes = useStyles();
@@ -27,6 +29,7 @@ export default function MainLight() {
                 <Grid item xs={12}>
                     <Paper className={classes.paper}>
                         <Button
+                        onClick= {()=>{service.changePrincial()}}
                             style={
                                 {
                                     cursor: 'none',
