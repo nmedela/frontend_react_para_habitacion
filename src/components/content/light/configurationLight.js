@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 const service = new LightService()
-
+const interval= 0
 export default function ConfigurationLight() {
     const classes = useStyles();
     const [age, setAge] = React.useState('');
