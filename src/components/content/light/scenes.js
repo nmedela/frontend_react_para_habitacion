@@ -75,6 +75,7 @@ const service = new LightService()
 export default function Scenes() {
     const classes = useStyles();
     const [lights, setLights] = React.useState(null);
+    const [scenes, setScenes] = React.useState(null);
     const [selected, setSelected] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
     const [open, setOpen] = React.useState(false);
@@ -83,17 +84,27 @@ export default function Scenes() {
             console.log(res)
             return res
         })
+    }
 
+    const getScenes =()=>{
+        return service.getScenes().then((res)=>{
+            return res
+        })
     }
     useEffect(() => {
         if (isLoading) {
 
             var valor = getAll()
+            var scenes = getScenes()
+            scenes.then((res) =>{
+                setScenes(res)
+            })
             valor.then((res) => {
                 setLights(res)
                 setSelected(0)
                 setIsLoading(false)
             })
+            
         }
 
     })
@@ -161,12 +172,12 @@ export default function Scenes() {
                     </Grid>
                     <Grid item xs={12} sm={8} >
                         <div className={classes.paperScenes}>
-                            <Button variant="contained" color="Primary" id="36" onClick={() => changeIntensity(36)} className={classes.buttonScenes}>Apagado</Button>
-                            <Button variant="contained" color="Primary" id="30" onClick={() => changeIntensity(30)} className={classes.buttonScenes}>Tenue</Button>
+                            <Button variant="contained" color="Primary" id={scenes[0].title} onClick={() => changeIntensity(scenes[0].intensity)} className={classes.buttonScenes}>scenes[0].title</Button>
+                            <Button variant="contained" color="Primary" id={scenes[1].title} onClick={() => changeIntensity(scenes[1].intensity)} className={classes.buttonScenes}>scenes[1].title</Button>
                         </div>
                         <div className={classes.paperScenes}>
-                            <Button variant="contained" color="Primary" id="24" onClick={() => changeIntensity(24)} className={classes.buttonScenes}>Agradable</Button>
-                            <Button variant="contained" color="Primary" id="10" onClick={() => changeIntensity(10)} className={classes.buttonScenes}>Full</Button>
+                            <Button variant="contained" color="Primary" id={scenes[2].title} onClick={() => changeIntensity(scenes[2].intensity)} className={classes.buttonScenes}>scenes[2].title</Button>
+                            <Button variant="contained" color="Primary" id={scenes[3].title} onClick={() => changeIntensity(scenes[3].intensity)} className={classes.buttonScenes}>scenes[3].title</Button>
                         </div>
                     </Grid>
                 </Grid>

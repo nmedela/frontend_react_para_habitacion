@@ -17,6 +17,12 @@ class LightService {
                 return res.data
             })
     }
+    getScenes =()=>{
+        return axios.get(`http://${url}/light/scenes`)
+        .then((res) =>{
+            return res.data
+        })
+    }
 
     getSteps = () => {
         return axios.get(`http://${url}/light/steps`)
