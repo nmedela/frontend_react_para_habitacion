@@ -8,4 +8,4 @@ const pathIndex = [
 
 export default pathIndex
 
-export const url='192.168.100.99:4000'
+export const url='192.168.0.99:4000'
